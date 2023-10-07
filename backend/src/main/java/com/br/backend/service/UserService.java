@@ -1,4 +1,4 @@
-package service;
+package com.br.backend.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,10 +7,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import dto.UserRecordDto;
-import model.UserModel;
-import repositories.UserRepository;
+import com.br.backend.dto.UserRecordDto;
+import com.br.backend.model.UserModel;
+import com.br.backend.repositories.UserRepository;
 
 @Service
 public class UserService {

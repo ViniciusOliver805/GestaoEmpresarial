@@ -1,4 +1,4 @@
-package controller;
+package com.br.backend.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dto.UserRecordDto;
+import com.br.backend.dto.UserRecordDto;
+import com.br.backend.model.UserModel;
+import com.br.backend.service.UserService;
+
 import jakarta.validation.Valid;
-import model.UserModel;
-import service.UserService;
 
 @RestController
 @RequestMapping("/users")
@@ -49,7 +50,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userList);
     }
 
-    @GetMapping("/{id}") // Consultar por ID
+    @GetMapping("/{idUser}") // Consultar por ID
     public ResponseEntity<Object> getUserById(@PathVariable Long idUser) {
         Optional<UserModel> userOptional = userService.getUserById(idUser);
         if (userOptional.isPresent()) {

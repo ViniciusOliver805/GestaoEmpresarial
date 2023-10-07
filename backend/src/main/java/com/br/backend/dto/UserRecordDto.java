@@ -1,4 +1,4 @@
-package dto;
+package com.br.backend.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
@@ -8,7 +8,7 @@ import lombok.Data;
 // dto = data transfer object / objeto de transfêrencia de dado
 @Data
 public class UserRecordDto {
-    private Long idUsuario;
+    private Long idUser;
     @Size(max = 255, message = "O NOME deve ter apenas 255 Caracteres!")
     private String nome;
     private Integer cracha;
