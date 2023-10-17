@@ -1,5 +1,6 @@
 Para rodar o FrontEnd:
-    1º | npm run dev
+    1º | npm i
+    2º | npm run dev
 
 Para rodar o BackEnd:
     1º | docker-compose up

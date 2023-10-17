@@ -22,7 +22,7 @@ import com.br.backend.service.UserService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("users")
 public class UserController {
 
     private final UserService userService;
@@ -44,7 +44,7 @@ public class UserController {
     
     
 
-    @GetMapping // Consultar todos os usuários
+    @GetMapping("/listall") // Consultar todos os usuários
     public ResponseEntity<List<UserModel>> getAllUsers() {
         List<UserModel> userList = userService.getAllUsers();
         return ResponseEntity.status(HttpStatus.OK).body(userList);
