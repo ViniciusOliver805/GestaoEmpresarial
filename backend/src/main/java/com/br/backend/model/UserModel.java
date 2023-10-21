@@ -13,52 +13,43 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Table(name = "tabela_de_registro_usuario") // é o nome da tabela no banco
-@Data // para geração automatica de get e set
-@Entity // para gerar a tabela no banco
+@Table(name = "TabelaDeUsuarios") // é o nome da tabela no banco
+@Getter
+@Entity(name = "TabelaDeUsuarios") // para gerar a tabela no banco
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "idUser")
 public class UserModel implements UserDetails {
     @Id //indica que a variavel debaixo é onde iremos armazenar o id gerado
     @GeneratedValue(strategy = GenerationType.IDENTITY) //faz gera automatico o id sequencial
     private Long idUser;
     @Column(unique = true)
-    private String usuario;
-    private String nome;
-    private Integer cracha;
-    private String setor;
-    @Column(unique = true) // nao permite o email senha duplicado ou seja ter dois igual no banco
-    private String email;
-    private String senha;
+    private String userSystem;
+    private String password;
     private UserRole role;
+  
 
-    public UserModel() {
-        // Construtor padrão
-    }
-    
-
-    public UserModel(String usuario, String senha, UserRole role){
-         this.usuario = usuario;
-         this.senha = senha;
+    public UserModel(String userSystem, String password, UserRole role){
+         this.userSystem = userSystem;
+         this.password = password;
          this.role = role;
     }
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.role == UserRole.ADMIN) {
-            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-        } else {
-            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-        }
-    }
-    @Override
-    public String getPassword() {
-        return senha;
+        if (this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        
     }
     @Override
     public String getUsername() {
-        return usuario;
+        return userSystem;
     }
     @Override
     public boolean isAccountNonExpired() {

@@ -7,5 +7,5 @@ import com.br.backend.model.UserModel;
 
 
 public interface UserRepository extends JpaRepository<UserModel, Long> {
-    UserDetails findByUsuario(String usuario);
+    UserDetails findByUserSystem(String userSystem);
 }

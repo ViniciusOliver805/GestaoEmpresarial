@@ -2,7 +2,6 @@ package com.br.backend.dto;
 
 import com.br.backend.model.UserRole;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -11,14 +10,8 @@ import lombok.Data;
 @Data
 public class UserRecordDto {
     private Long idUser;
-    private String usuario;
-    @Size(max = 255, message = "O NOME deve ter apenas 255 Caracteres!")
-    private String nome;
-    private Integer cracha;
-    private String setor;
-    @Email(message = "O formato do email é inválido!")
-    @Size(max = 255, message = "O EMAIL deve ter apenas 255 Caracteres!")
-    private String email;
-    private String senha;
+    @Size(max = 20, message = "O limite para o campo 'Usuário' é de 20 caracteres")
+    private String userSystem;
+    private String password;
     private UserRole role;
 }

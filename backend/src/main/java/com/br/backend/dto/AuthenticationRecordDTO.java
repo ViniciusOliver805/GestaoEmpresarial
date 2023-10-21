@@ -1,5 +1,5 @@
 package com.br.backend.dto;
 
-public record AuthenticationRecordDTO(String usuario, String senha) {
+public record AuthenticationRecordDTO(String userSystem, String password) {
     
 }

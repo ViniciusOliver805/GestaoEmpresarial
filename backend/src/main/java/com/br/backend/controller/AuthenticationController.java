@@ -1,5 +1,6 @@
 package com.br.backend.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,27 +33,32 @@ public class AuthenticationController {
     @Autowired
     private TokenService tokenService;
 
+   
+
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthenticationRecordDTO data){
-        var usernamePassword = new UsernamePasswordAuthenticationToken(data.usuario(), data.senha());
+    public ResponseEntity login(@RequestBody @Valid AuthenticationRecordDTO data) {
+        var usernamePassword = new UsernamePasswordAuthenticationToken(data.userSystem(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        var token = tokenService.generateToken((UserModel)auth.getPrincipal());
+        var token = tokenService.generateToken((UserModel) auth.getPrincipal());
 
         return ResponseEntity.ok(new UsuarioResponseRecordDTO(token));
+
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegisterRecordDTO data){
-        if(this.repository.findByUsuario(data.usuario()) != null){
+    public ResponseEntity register(@RequestBody @Valid RegisterRecordDTO data) {
+        if (this.repository.findByUserSystem(data.userSystem()) != null) {
             return ResponseEntity.badRequest().build();
         }
-        String ecryptedPassword = new BCryptPasswordEncoder().encode(data.senha());
-        UserModel newUser = new UserModel(data.usuario(), ecryptedPassword, data.role());
+        String ecryptedPassword = new BCryptPasswordEncoder().encode(data.password());
+        UserModel newUser = new UserModel(data.userSystem(), ecryptedPassword, data.role());
 
         this.repository.save(newUser);
 
         return ResponseEntity.ok().build();
 
     }
+
+    
 }
