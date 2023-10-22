@@ -18,9 +18,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "TabelaDeUsuarios") // é o nome da tabela no banco
+@Table(name = "users") // é o nome da tabela no banco
 @Getter
-@Entity(name = "TabelaDeUsuarios") // para gerar a tabela no banco
+@Entity(name = "users") // para gerar a tabela no banco
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "idUser")

@@ -36,7 +36,7 @@ public class AuthenticationController {
    
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthenticationRecordDTO data) {
+    public ResponseEntity<Object> login(@RequestBody @Valid AuthenticationRecordDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.userSystem(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
@@ -47,7 +47,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegisterRecordDTO data) {
+    public ResponseEntity<Object> register(@RequestBody @Valid RegisterRecordDTO data) {
         if (this.repository.findByUserSystem(data.userSystem()) != null) {
             return ResponseEntity.badRequest().build();
         }

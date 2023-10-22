@@ -34,7 +34,7 @@ public class EmployeeController {
     @PostMapping
     public ResponseEntity<EmployeeModel> saveEmployee(@RequestBody @Valid EmployeeDTO employeeDTO) {
         if (employeeDTO.getBadge() == null || employeeDTO.getEmail() == null ) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); //futuramente adicionar tratamento de exceções nos bad_request
         } 
 
         EmployeeModel employeeModel = employeeService.saveEmployee(employeeDTO);

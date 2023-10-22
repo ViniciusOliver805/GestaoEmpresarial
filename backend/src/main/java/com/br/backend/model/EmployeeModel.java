@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 
-@Table(name = "TabelaDeEmpregados") // é o nome da tabela no banco
+@Table(name = "employees") // é o nome da tabela no banco
 @Data // para geração automatica de get e set
 @Entity // para gerar a tabela no banco
 public class EmployeeModel {

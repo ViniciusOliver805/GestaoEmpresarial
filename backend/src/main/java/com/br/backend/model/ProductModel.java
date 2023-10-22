@@ -1,19 +1,15 @@
 package com.br.backend.model;
 
-import com.br.backend.dto.ProductRequestDTO;
-
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
 
 @Table(name = "product")
-@Entity(name = "product")
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(of = "id")
+@Data
+@Entity
 public class ProductModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -21,10 +17,9 @@ public class ProductModel {
 
     private String name;
 
-    private Integer price;
+    private Double price;
 
-    public ProductModel(ProductRequestDTO data){
-        this.price = data.price();
-        this.name = data.name();
-    }
+    private String category;
+
+ 
 }
