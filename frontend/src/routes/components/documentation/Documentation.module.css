@@ -1,0 +1,15 @@
+.container {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    font-family: "Blinker";
+}
+
+.background_apresentacao{
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    color: rgb(255, 255, 255); 
+
+}

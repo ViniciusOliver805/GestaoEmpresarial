@@ -9,6 +9,7 @@ import Register from "./routes/components/UserRegistration/register/Register"
 // import para usar o routes
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Documentation from './routes/components/documentation/documentation';
 
 const router = createBrowserRouter([
   // {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
   },
+  {
+    path: "/documentation",
+    element: <Documentation />,
+  }
   
   
 
