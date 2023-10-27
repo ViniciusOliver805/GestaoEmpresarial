@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./Documentation.module.css";
 
 function Documentation() {
@@ -47,7 +48,7 @@ function Documentation() {
                 </ul>
 
                 <h3>3.2 Instalação de Dependências</h3>
-                <p>Comandos para instalar todas as dependências necessárias tanto para o frontend quanto para o backend.</p>
+                <p>Comandos para instalar todaa as dependências necessárias tanto para o frontend quanto para o backend.</p>
 
                 <h2>4. Configuração do Banco de Dados</h2>
 
@@ -168,7 +169,15 @@ function Documentation() {
 
                 <h3>13.1 Trechos de Código Relevantes</h3>
                 <p>Exemplos de código com explicações detalhadas.</p>
-
+                <div className={styles.buttond} >
+                    <Link className={styles.inicioprojeto} to="/welcome">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        IR PARA O PROJETO
+                    </Link>
+                </div>
 
             </div>
 

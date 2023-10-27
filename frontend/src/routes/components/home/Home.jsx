@@ -23,7 +23,7 @@ function Home() {
           <h1>O projeto a seguir foi desenvolvido com o intuito de adquirir conhecimento e aprimorar minhas habilidades como desenvolvedor backend.</h1>
         </div>
         <div className={styles.buttond} >
-          <Link to="/documentation">
+          <Link className={styles.dale} to="/documentation">
             <span></span>
             <span></span>
             <span></span>
