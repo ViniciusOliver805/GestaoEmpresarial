@@ -44,11 +44,16 @@ const router = createBrowserRouter([
   {
     path: "/welcome",
     element: <Welcome />,
-  }
-  
+  },
+
   
 
 ])
+  
+  
+  
+
+
    
 
 ReactDOM.createRoot(document.getElementById('root')).render(

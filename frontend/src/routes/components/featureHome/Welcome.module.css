@@ -46,7 +46,7 @@
   transform: translate(-50%, -50%);
 }
 
-button {
+.button {
   background: #317abe;
   opacity: 0.9;
   border: 2px solid #fff;
@@ -61,7 +61,7 @@ button {
   outline: none;
 }
 
-button:hover {
+.button:hover {
   background: #026bce;
   opacity: 1;
 }
