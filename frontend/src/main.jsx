@@ -11,6 +11,7 @@ import Register from "./routes/components/userRegistration/register/Register"
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Documentation from './routes/components/documentation/documentation';
 import Welcome from './routes/components/featureHome/Welcome';
+import ExemploRequisicaoPost from './routes/components/featureHome/company/ExemploRequisicaoPost';
 
 const router = createBrowserRouter([
   // {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
   {
     path: "/welcome",
     element: <Welcome />,
+  },
+  {
+    path: "/produtoteste",
+    element: <ExemploRequisicaoPost />,
   },
 
   

@@ -1,37 +1,78 @@
 import { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
 import styles from "./Welcome.module.css";
 import cliente from "../../../assets/img/cliente.jpg";
 import empresa from "../../../assets/img/empresa.jpg";
 
+import { useNavigate } from 'react-router-dom'; // Mude esta linha
+
+
 function Welcome() {
   const [isClienteHovered, setIsClienteHovered] = useState(false);
   const [isEmpresaHovered, setIsEmpresaHovered] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [login, setLogin] = useState('');
-  const [senha, setSenha] = useState('');
+  const [userSystem, setUserSystem] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleLoginChange = (e) => {
-    setLogin(e.target.value);
+  const navigate = useNavigate(); // Mude esta linha
+
+
+  const handleUserSystemChange = (e) => {
+    setUserSystem(e.target.value);
   }
 
-  const handleSenhaChange = (e) => {
-    setSenha(e.target.value);
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
   }
 
-  const handleModalClose = () => setShowModal(false);
-  const handleModalShow = () => setShowModal(true);
+  const handleModalClose = () => {
+    setShowModal(false);
+    setErrorMessage('');
+  }
 
-  const handleSubmit = (e) => {
+  const handleModalShow = () => {
+    setShowModal(true);
+    setErrorMessage('');
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Adicione aqui a lógica para lidar com o envio do formulário (autenticação, etc.)
-    // Por exemplo, você pode enviar os dados para um servidor aqui.
-    // Depois de lidar com a autenticação, você pode fechar o modal chamando a função handleModalClose.
-    handleModalClose();
-  }
 
+    try {
+      const response = await axios.post(
+        'http://localhost:8080/auth/login',
+        {
+          userSystem: userSystem,
+          password: password
+        }
+      );
+
+      const token = response.data.token;
+      console.log('Token:', token);
+      localStorage.setItem('token', token);
+
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      const userRole = decodedToken.sub || ''; // Use 'sub' ao invés de 'roles'
+
+      // Condição de verificação (ajuste conforme necessário)
+      if (userRole === 'admin') {
+        console.log('Parabéns, você tem permissão!');
+        navigate('/produtoteste');
+
+        // Adicione aqui qualquer lógica adicional que você precise
+      } else {
+        console.log('Você não tem permissão.');
+        // Adicione aqui qualquer lógica adicional que você precise
+      }
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
+      setErrorMessage('Credenciais inválidas. Por favor, tente novamente.', errorMessage);
+    }
+  }
   return (
     <div className={styles.container}>
       <div className={styles.background_apresentacao}>
@@ -78,13 +119,13 @@ function Welcome() {
         <Modal.Body>
           <p>Olá administrador, coloque seu usuário e senha para prosseguirmos</p>
           <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="formBasicLogin">
-              <Form.Label>Login</Form.Label>
-              <Form.Control type="text" placeholder="Digite o login" value={login} onChange={handleLoginChange} required />
+            <Form.Group controlId="formBasicUserSystem">
+              <Form.Label>User System</Form.Label>
+              <Form.Control type="text" placeholder="Digite o usuário" value={userSystem} onChange={handleUserSystemChange} required />
             </Form.Group>
-            <Form.Group controlId="formBasicSenha">
-              <Form.Label>Senha</Form.Label>
-              <Form.Control type="password" placeholder="Digite a senha" value={senha} onChange={handleSenhaChange} required />
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" placeholder="Digite a senha" value={password} onChange={handlePasswordChange} required />
             </Form.Group>
             <Button variant="primary" type="submit">
               Entrar
@@ -96,7 +137,7 @@ function Welcome() {
         </Modal.Body>
       </Modal>
     </div>
-  )
+  );
 }
 
 export default Welcome;
